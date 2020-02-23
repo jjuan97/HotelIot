@@ -1,22 +1,18 @@
 #!/usr/bin/python
 
 import paho.mqtt.publish as publish
-from random import randint
+from bluetooth.ble import DiscoveryService
 import time
 
-topic = "example1990/raspberrypi1/luz123"
+serviceBLE = DiscoveryService()
+topic = "hotel/raspberryRoom/entrance"
 broker = "broker.hivemq.com"
 
-def get_data(pin):
-	reading = 0
-	GPIO.setup(pin, GPIO.OUT)
-	GPIO.output(pin, GPIO.LOW)
-	time.sleep(0.1)
-	
-	GPIO.setup(pin, GPIO.IN)
-	while (GPIO.input(pin) == GPIO.LOW):
-		reading += 1
-	return reading
+def scanBLE():
+	devices = serviceBLE.discover(2)
+	for address, name in devices.items():
+		print("name:{}, address:{}".format(name,address))
+		return(address)
 
 def mqtt_pub(message):
 	try:
@@ -26,9 +22,15 @@ def mqtt_pub(message):
 		print "[ERROR]"
 
 while True:
-	print("Inicio")
-	data = get_data(11)
-	mqtt_pub(data)
-	print("Fin")
-	print("")
-	time.sleep(3)
+	print("Iniciando Busqueda de Beacons ...")
+	data = scanBLE()
+	if str(data) != "None":
+		print("Se encontro el beacon con direccion MAC: " + str(data))
+		mqtt_pub(data)
+		print("Fin")
+		print("")
+		time.sleep(10)
+	else:
+		print("Error detectando Beacon, compruebe beacon cercano")
+		print("")
+		time.sleep(2)
