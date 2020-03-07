@@ -19,7 +19,7 @@
 ### POSIBLES ERRORES: 
 1. instalar gattlib podria significar un problema para el archivo dphys-swapfile:
   1.1. Editar el archivo, sudo nano /etc/dphys-swapfile
-  1.2. Editar la variable de **CONF_SWAPSIZE=100** a **CONF_SWAPSIZE=500**
+  1.2. Editar la variable de "CONF_SWAPSIZE=100" a "CONF_SWAPSIZE=500"
   1.3. Parar y recargar el archivo, **sudo /etc/init.d/dphys-swapfile stop** y **sudo /etc/init.d/dphys-swapfile start**
   1.4. Ejecutar una vez mas **sudo pip install gattlib** y esperar maximo se demorara 15 minutos.
 
