@@ -1,7 +1,7 @@
 # HotelIot
-##Proyect for IOT
+## Proyect for IOT
 
-###Instalación para raspberry:
+### Instalación para raspberry:
 1. Clonar repositorio comando: git clone https://github.com/jjuan97/HotelIot
 2. Ejecutar sudo apt-get update
 3. Ejecutar sudo apt-get upgrade
@@ -16,7 +16,7 @@
 
 
 
-###POSIBLES ERRORES: 
+### POSIBLES ERRORES: 
 1. instalar gattlib podria significar un problema para el archivo dphys-swapfile:
   1.1. Editar el archivo, sudo nano /etc/dphys-swapfile
   1.2. Editar la variable de **CONF_SWAPSIZE=100** a **CONF_SWAPSIZE=500**
