@@ -14,8 +14,6 @@
     - 5.5. `sudo pip install gattlib`
 6. Reiniciar raspberry, `sudo reboot`
 
-
-
 ### POSIBLES ERRORES: 
 1. instalar gattlib podria significar un problema para el archivo dphys-swapfile:
     - 1.1. Editar el archivo, `sudo nano /etc/dphys-swapfile`
