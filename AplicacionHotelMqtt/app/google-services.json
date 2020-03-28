@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "587270181349",
+    "firebase_url": "https://loginscreen-3abe9.firebaseio.com",
+    "project_id": "loginscreen-3abe9",
+    "storage_bucket": "loginscreen-3abe9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587270181349:android:1787e75d32fc464eaedf0c",
+        "android_client_info": {
+          "package_name": "com.ubicuos.aplicacionhotelmqtt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587270181349-pe7ohakp4snpj6891ofeo5fffi85h5ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCHugl_zr3y1a6CucjxFZ1bRlSf9KOmRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587270181349-pe7ohakp4snpj6891ofeo5fffi85h5ep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

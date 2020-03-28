@@ -3,12 +3,17 @@ package com.ubicuos.aplicacionhotelmqtt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import android.os.Bundle;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.ubicuos.aplicacionhotelmqtt.ui.login.LoginActivity;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -28,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     MqttAndroidClient mqttClient;
     String EXAMPLE_TOPIC = "hotel/raspberryRoom/entrance";
     String EXAMPLE_SERVER = "tcp://broker.hivemq.com";
+    Button signOut;
+    FirebaseAuth homeFirebaseAuth;
+    private FirebaseAuth.AuthStateListener homeStateListenerAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +45,20 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         mqttText = findViewById(R.id.mqtt);
         borrarButton = findViewById(R.id.borrar);
+        signOut = findViewById(R.id.signout);
         borrarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mqttText.setText("");
+            }
+        });
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intToLogin = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intToLogin);
+                finish();
             }
         });
         iniciarMqtt();
@@ -48,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy()
-        ;
+        super.onDestroy();
         if (mqttClient != null) {
             mqttClient.close();
         }

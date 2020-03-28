@@ -7,4 +7,7 @@
     <color name="colorSecondaryDark">#007087</color>
     <color name="colorSecondaryLight">#5ad0e9</color>
     <color name="colorAccent">#FF6D72</color>
+    <color name="transparent">#11000000</color>
+    <color name="hintColor">#54DAD8D6</color>
+    <color name="textWhiteColor">#ffffff</color>
 </resources>

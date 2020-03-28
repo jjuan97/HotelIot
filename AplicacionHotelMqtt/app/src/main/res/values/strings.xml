@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">AplicacionHotelMqtt</string>
     <string name="title_activity_login">IHoTel</string>
-    <string name="prompt_email">Nombre de usuario</string>
+    <string name="prompt_email">Email</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Iniciar Sesión</string>
     <string name="action_sign_in_short">Iniciar</string>
     <string name="welcome">"¡Bienvendio!  "</string>
     <string name="invalid_username">El nombre de usuario es incorrecto</string>
     <string name="invalid_password">El password debe ser >5 caracteres</string>
-    <string name="login_failed">"Fallo el inicio de sesión"</string>
+    <string name="empty_username">Por favor ingresa tu email</string>
+    <string name="empty_password">Por favor ingresa tu contraseña</string>
+    <string name="empty_fields">Los campos estan vacíos</string>
+    <string name="login_failed">"Fallo el inicio de sesión, Por favor intentar nuevamente"</string>
+    <string name="failed">"A ocurrido un error"</string>
+    <string name="login_ready">"Tu sesión ya se encuentra iniciada"</string>
+    <string name="login_please">"Por favor inicia sesión"</string>
 </resources>
