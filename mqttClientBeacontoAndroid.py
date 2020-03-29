@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
 import paho.mqtt.publish as publish
-from bluetooth.ble import DiscoveryService
+from gattlib import DiscoveryService
 import time
 
 serviceBLE = DiscoveryService()
-topic = "hotel/raspberryRoom/entrance"
+topic = "hotel/raspberry1/restaurant"
 broker = "broker.hivemq.com"
 
 def scanBLE():
@@ -16,10 +16,10 @@ def scanBLE():
 
 def mqtt_pub(message):
 	try:
-		print("Enviando ["+str(message)+"]")
+		print("Enviando ["+str(message)+"] ...")
 		publish.single(topic, str(message), hostname=broker)
 	except:
-		print "[ERROR]"
+		print ("[ERROR]")
 
 while True:
 	print("Iniciando Busqueda de Beacons ...")
@@ -27,10 +27,10 @@ while True:
 	if str(data) != "None":
 		print("Se encontro el beacon con direccion MAC: " + str(data))
 		mqtt_pub(data)
-		print("Fin")
-		print("")
-		time.sleep(10)
+		print("Enviado\nFin")
+		print(" ")
+		time.sleep(6)
 	else:
 		print("Error detectando Beacon, compruebe beacon cercano")
 		print("")
-		time.sleep(2)
+		time.sleep(1)
