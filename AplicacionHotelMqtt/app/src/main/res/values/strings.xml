@@ -15,4 +15,7 @@
     <string name="failed">"A ocurrido un error"</string>
     <string name="login_ready">"Tu sesión ya se encuentra iniciada"</string>
     <string name="login_please">"Por favor inicia sesión"</string>
+    <string name="tittle_notification">IHotel</string>
+    <string name="channel_name">Canal ihotel</string>
+    <string name="channel_description">Descripcion ihotel</string>
 </resources>

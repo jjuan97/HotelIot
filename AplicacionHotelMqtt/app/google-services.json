@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "587270181349",
-    "firebase_url": "https://loginscreen-3abe9.firebaseio.com",
-    "project_id": "loginscreen-3abe9",
-    "storage_bucket": "loginscreen-3abe9.appspot.com"
+    "project_number": "869155145887",
+    "firebase_url": "https://ihotel-538ba.firebaseio.com",
+    "project_id": "ihotel-538ba",
+    "storage_bucket": "ihotel-538ba.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:587270181349:android:1787e75d32fc464eaedf0c",
+        "mobilesdk_app_id": "1:869155145887:android:a70a1b2e36a70c105cfaaa",
         "android_client_info": {
           "package_name": "com.ubicuos.aplicacionhotelmqtt"
         }
       },
       "oauth_client": [
         {
-          "client_id": "587270181349-pe7ohakp4snpj6891ofeo5fffi85h5ep.apps.googleusercontent.com",
+          "client_id": "869155145887-1qsgeo358c4il5sotnksj7ttrds14evh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCHugl_zr3y1a6CucjxFZ1bRlSf9KOmRI"
+          "current_key": "AIzaSyApth5LmZc8AgI8DSkzaXG705s68WrZC9c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "587270181349-pe7ohakp4snpj6891ofeo5fffi85h5ep.apps.googleusercontent.com",
+              "client_id": "869155145887-1qsgeo358c4il5sotnksj7ttrds14evh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
