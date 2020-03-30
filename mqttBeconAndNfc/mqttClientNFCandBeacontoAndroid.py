@@ -3,6 +3,7 @@
 import paho.mqtt.publish as publish
 from gattlib import DiscoveryService
 import time
+import rfidiot
 
 serviceBLE = DiscoveryService()
 #topic = "hotel/raspberry1/restaurantes"
@@ -21,8 +22,24 @@ def mqtt_pub(message):
 		publish.single(topic, str(message), hostname=broker)
 	except:
 		print ("[ERROR]")
+def scanNFC():
+	print("Inicio Deteccion TAG NFC")
+	try:
+		card = rfidiot.card
+		args = rfidiot.args
+		if len(args) == 1:
+			card.settagtype(args[0])
+		else:
+			card.settagtype(card.ALL)
+		if card.select():
+			print("TAG ID: "+ card.uid)
+	except:
+		pass
+	finally:
+		print("Fin Deteccion TAG NFC")
 
 while True:
+	scanNFC()
 	print("Iniciando Busqueda de Beacons ...")
 	#data = scanBLE()
 	#data= "horario=De 7 AM a 9 PM?nombre=Restaurante IHoTel?ubicacion=Edificio 2, Piso 1, IHoTel"
