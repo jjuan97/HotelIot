@@ -1,5 +1,7 @@
 # HotelIot
-## Proyect for IOT
+## Video de Demostración IHoTel
+https://youtu.be/144RZzcFyQ0
+## Pasos para la ejecución del proyecto IHoTel
 
 ### Instalación para raspberry:
 1. Clonar repositorio comando: git clone https://github.com/jjuan97/HotelIot
