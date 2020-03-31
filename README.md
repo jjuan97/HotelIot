@@ -21,3 +21,9 @@
     - 1.3. Parar y recargar el archivo, `sudo /etc/init.d/dphys-swapfile stop` y `sudo /etc/init.d/dphys-swapfile start`
     - 1.4. Ejecutar una vez mas `sudo pip install gattlib` y esperar maximo se demorara 15 minutos.
 
+##Autores:
+- JUAN JOSE PAREDES ROSERO. (jparedesr@unicauca.edu.co)
+- ASTRID DANIELA NARVAEZ LOPEZ. (astriddnarvaez@unicauca.edu.co)
+- JORGE ARMANDO MUNOZ ORDONEZ. (jorgemo@unicauca.edu.co)
+- EDINSON DAVID LEON CHILITO. (leoc@unicauca.edu.co)
+- SANTIAGO FELIPE YEPES CHAMORRO. (ysantiago@unicauca.edu.co)
