@@ -1,9 +1,9 @@
-# HotelIot
+# Hotel Iot (IHoTel)
 ## Video de Demostración IHoTel
 https://youtu.be/144RZzcFyQ0
 ## Pasos para la ejecución del proyecto IHoTel
 
-### Instalación para raspberry:
+### Instalación para raspberry (solo detecta beacon):
 1. Clonar repositorio comando: git clone https://github.com/jjuan97/HotelIot
 2. Ejecutar `sudo apt-get update`
 3. Ejecutar `sudo apt-get upgrade`
@@ -19,6 +19,12 @@ https://youtu.be/144RZzcFyQ0
     `pip install --upgrade firebase-admin`
     Tomado de: https://firebase.google.com/docs/firestore/quickstart
 
+### Instalacion para raspberry (detecta beacon y NFC)
+1. Descargar imagen raspbian (jessie) que permite ejecutar las librerias que trabajan con el lector NFC touchatag: https://drive.google.com/drive/u/2/folders/1T3qSvR-Hg-hm_u__w2YWRVnkBnsRxgxd
+2. Instalar imagen en la memoria SD (seguir documentacion oficial: https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
+3. Seguir los pasos de la anterior instalación
+4. Ejecutar archivo mqttClientNFCandBeacontoAndroid.py en la carpeta mqttBeconAndNfc
+
 ### POSIBLES ERRORES: 
 1. Instalar gattlib podria significar un problema para el archivo dphys-swapfile:
     - 1.1. Editar el archivo, `sudo nano /etc/dphys-swapfile`
@@ -27,12 +33,13 @@ https://youtu.be/144RZzcFyQ0
     - 1.4. Ejecutar una vez mas `sudo pip install gattlib` y esperar maximo se demorara 15 minutos.
     
 2. Al instalar la libreria firebase-admin, pueden presentarse errores durante la ejecución de Setup.py, asociados posiblemente a conflictos con setuptools.py o incompatibilidades con la version de python que se este usando. Por lo anterior se realizan las siguientes recomendaciones:
-    - 2.1. Si se presenta el siguiente error `TypeError: unsupported operand type(s) for -=: 'Retry' and 'int'` durante             la instalación de la librería se recomienda usar estos pasos antes realizar un nuevo intento de instalación:
+    - 2.1. Si se presenta el siguiente error `TypeError: unsupported operand type(s) for -=: 'Retry' and 'int'` durante la instalación de la librería se recomienda usar estos pasos antes realizar un nuevo intento de instalación:
 
-    `apt-get remove python-pip python3-pip`
-    `wget https://bootstrap.pypa.io/get-pip.py`
-    `python get-pip.py`
-    `python3 get-pip.py`
+        - `apt-get remove python-pip python3-pip`
+        - `wget https://bootstrap.pypa.io/get-pip.py`
+        - `python get-pip.py`
+        - `python3 get-pip.py`
+        
     Tomado de https://stackoverflow.com/questions/37495375/python-pip-install-throws-typeerror-unsupported-operand-types-for-retry
     
     - 2.2. Utilizar una version de python > 3.5 para ejecutar el script donde se emplee Firebase.
