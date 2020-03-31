@@ -25,6 +25,9 @@ https://youtu.be/144RZzcFyQ0
 3. Seguir los pasos de la anterior instalación
 4. Ejecutar archivo mqttClientNFCandBeacontoAndroid.py en la carpeta mqttBeconAndNfc
 
+### Instalar aplicación web
+El archivo web no necesita de una instalación, basta solo con ejecutar el archivo index.html
+
 ### Instalar aplicación android
 La instalación de la aplicación se puede dar de dos formas:
 1. Abrir desde android studio el proyecto AplicacionHotelMqtt y compilar la aplicación.
