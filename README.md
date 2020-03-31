@@ -3,7 +3,7 @@
 https://youtu.be/144RZzcFyQ0
 ## Pasos para la ejecución del proyecto IHoTel
 
-### Instalación para raspberry (solo detecta beacon):
+### Instalación para raspberry (su funcion es solo detectar beacon):
 1. Clonar repositorio comando: git clone https://github.com/jjuan97/HotelIot
 2. Ejecutar `sudo apt-get update`
 3. Ejecutar `sudo apt-get upgrade`
@@ -18,15 +18,16 @@ https://youtu.be/144RZzcFyQ0
 7. Instalar librerias Firebase:    
     `pip install --upgrade firebase-admin`
     Tomado de: https://firebase.google.com/docs/firestore/quickstart
+8. ejecutar el script BeacontoAndroid.py
 
-### Instalación para raspberry (detecta beacon y NFC)
+### Instalación para raspberry (su funcion es detectar beacon y NFC)
 1. Descargar imagen raspbian (jessie) que permite ejecutar las librerias que trabajan con el lector NFC touchatag: https://drive.google.com/drive/u/2/folders/1T3qSvR-Hg-hm_u__w2YWRVnkBnsRxgxd
 2. Instalar imagen en la memoria SD (seguir documentacion oficial: https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
-3. Seguir los pasos de la anterior instalación
-4. Ejecutar archivo mqttClientNFCandBeacontoAndroid.py en la carpeta mqttBeconAndNfc
+3. Seguir los pasos de la anterior instalación hasta el reinicio de raspberry.
+4. Ejecutar archivo mqttClientNFCandBeacontoAndroid.py en la carpeta mqttBeconAndNfc.
 
 ### Instalar aplicación web
-El archivo web no necesita de una instalación, basta solo con ejecutar el archivo index.html
+El archivo web no necesita de una instalación, basta solo con ejecutar el archivo index.html.
 
 ### Instalar aplicación android
 La instalación de la aplicación se puede dar de dos formas:
@@ -51,6 +52,7 @@ La instalación de la aplicación se puede dar de dos formas:
     Tomado de https://stackoverflow.com/questions/37495375/python-pip-install-throws-typeerror-unsupported-operand-types-for-retry
     
     - 2.2. Utilizar una version de python > 3.5 para ejecutar el script donde se emplee Firebase.
+    - 2.3. Para el lograr la conexión con Firebase tanto desde la aplicación móvil como desde la aplicación web, se hacen necesario agregar ciertos datos del proyecto, para el caso de la página web incluidos en uno de los archivos javascript y para el caso de android incluidos en un archivo JSON en el directorio “app”.  Sin embargo para lograr la conexión desde un script python es necesario incluir un archivo con los credenciales de administración del proyecto de Firebase, el cual permite tener un control total del proyecto. Por obvias razones no se incluye este archivo en el repositorio.
 3. Aplicación no abre, si la aplicación no abre comprobar si su Smartphone tiene version de android por encima de la API 23 (Android 6.0 Marshmallow), de lo contrario la aplicación no se podra ejecutar con exito.
 
 ### Autores:
