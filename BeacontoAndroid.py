@@ -10,7 +10,8 @@ from firebase_admin import firestore
 
 #	TODO
 #	Configure the credentials of Firebase Admin and create clients.
-#	Change the path of JSON file
+#	Change the path of JSON credentials file 
+#	To get the JSON credentials file contact ysantiago@unicauca.edu.co xD
 cred = credentials.Certificate("/home/santiago/ubicuos/ihotel-538ba-firebase-adminsdk-esnt1-614649f757.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()

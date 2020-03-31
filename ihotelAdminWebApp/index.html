@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Compiled and minified CSS 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+
+    <!--<script src="js/jquer.js"></script>-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            M.AutoInit()
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.slider').slider();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.carousel').carousel({
+                dist: 0,
+                padding: 0,
+                fullWidth: true,
+                indicators: true,
+                duration: 100,
+            });
+        });
+
+        autoplay()
+
+        function autoplay() {
+            $('.carousel').carousel('next');
+            setTimeout(autoplay, 4000);
+        }
+    </script>
+
+</head>
+
+<body>
+    <!--Navegador-->
+    <div class="navbar-fixed">
+        <nav class="nav-extended ">
+            <div class="nav-wrapper container ">
+
+                <a href="index.html" class="brand-logo"><img src="Img/H.png" width="80" height="65"><img
+                        src="Img/IHOTEL.png" width="60" height="50"></a>
+                <div class="nav-content right hide-on-med-and-down">
+                    <ul class="tabs tabs-transparent " id="slide-out">
+                        <li class="tab"><a class="active" href="#test1">Inicio</a></li>
+                        <li class="tab"><a href="#test2">Agregar Usuarios</a></li>
+                        <li class="tab"><a href="#test3">Administrar Dispositivos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <!--INICIO-->
+    <div id="test1" class="">
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="Img/B6.jpg">
+                </li>
+                <li>
+                    <img src="Img/HOTEL.jpg">
+                    <div class="caption center-align">
+                        <h3>Hotel inteligente</h3>
+                        <h5 class="light grey-text text-lighten-3">Conectate desde tu smartphone y pon aprueba todos los servicios que te brinda IHotel</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="Img/B2.jpg">
+                </li>
+                <li>
+                    <img src="Img/recepcion.jpg">
+                    
+                </li>
+            </ul>
+        </div>
+        <!--<div class="parallax-container carousel carousel-slider">
+            <div class="parallax carousel-item white-text" href="#one!"><img src="Img/B6.jpg"></div>
+            <div class="parallax carousel-item white-text" href="#two!"><img src="Img/HOTEL.jpg"></div>
+            <div class="parallax carousel-item white-text" href="#thre!"><img src="Img/B2.jpg"></div>
+            <div class="parallax carousel-item white-text" href="#two!"><img src="Img/recepcion.jpg"></div>
+        </div>-->
+        <div class="section white">
+            <div class="row container">
+                <h2 class="header">IHoTel</h2>
+                <p class="grey-text text-darken-3 lighten-3">Te ofrecemos servicios de jacuzzi, Spa, Piscina,
+                    Restaurante y muchos mas, todo los espacios del hotel cuenta con tecnologia especializada, para
+                    brindarte mejor informacion acerca de tus lugares mas cercanos.</p>
+                <p class="grey-text text-darken-3 lighten-3">Para acceder a nuestros servicios accede desde tu
+                    smartphone a nuestra aplicaion</p>
+            </div>
+        </div>
+        <div class="parallax-container">
+
+            <div class="parallax"><img src="Img/B4.jpg"></div>
+        </div>
+    </div>
+
+
+    <!--AGREGAR USUARIO-->
+    <div id="test2" class="col s12">
+        <div id="index-banne" class="usuarios parallax-container row  ">
+            <!--<div class="paralax "><img src="Img/HotelDeg.jpg"></div>-->
+            <h4 class="center-align">REGISTRO USUARIOS</h4>
+
+            <!-- FORMULARIO-->
+            <form id="registro" class="container ">
+                <div class="back ">
+                    <div class="input-field col l6 m6 s11">
+                        <i class="material-icons prefix ">account_circle</i>
+                        <input type="text" name="nombre" id="nombre" required>
+                        <label for="nombre" class="white-text">Nombre y Apellido</label>
+                    </div>
+                    <div class="input-field col l6 m6 s11">
+                        <i class="material-icons prefix">email</i>
+                        <input type="email" name="email" id="email" required>
+                        <label for="email" class="white-text">E-mail</label>
+                    </div>
+                    <div class="input-field col l6 m6 s11">
+                        <i class="material-icons prefix">fingerprint</i>
+                        <input type="number" name="cc" id="cc" class="validate" required>
+                        <label for="cc" class="white-text">Cedula</label>
+                    </div>
+                    <div class="input-field col l6 m6 s11 ">
+                        <i class="material-icons prefix">monetization_on</i>
+                        <input type="number" name="creditos" id="creditos" class="validate" required>
+                        <label for="creditos" class="white-text">Creditos</label>
+                    </div>
+                    <div class="input-field col l6 m6 s11">
+                        <!--<input type="number" name="Dispositivo" id="Dispositivo" class="validate">-->
+                        <i class="material-icons prefix">nfc</i>
+                        <select name="nfc" id="nfc" class="validate" required>
+                            <option value="" disabled selected>NFC</option>
+                        </select>
+                    </div>
+                    <div class="input-field col l6 m6 s11">
+                        <i class="material-icons prefix">bluetooth</i>
+                        <select name="beacon" id="beacon" required class="validate">
+                            <option value="" disabled selected>Beacon</option>
+                        </select>
+                    </div>
+                    <div class="input-field col l6 m6 s11 offset-m3 offset-l3">
+                        <i class="material-icons prefix">local_hotel</i>
+                        <select class="validate" name="habitacion" id="habitaciones" required>
+                            <option value="" disabled selected>Habitacion</option>
+                        </select>
+                    </div>
+                    <div class="clearfix col l4 m4 "></div>
+                    <button type="submit" class="btn waves-effect col l4 m4 s12">
+                        <i class="material-icons right">send</i>
+                        Registrar Usuario
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- MOSTRAR INFO... USUARIOS-->
+    <div id="test3" class="col s12 admin">
+        <br><br>
+        <div class="row">
+            <div class="col l1 "></div>
+            <div class="container col l10 s11 m11">
+                <table id="usuariosActivos" class="stripe highlight  z-depth-5">
+                    <thead class="tablaC">
+                        <tr>
+                            <th>USUARIO</th>
+                            <th>CÉDULA</th>
+                            <th>HABITACIÓN</th>
+                            <th>NFC</th>
+                            <th>BEACON</th>
+                            <th>ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tablaB">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="confirmar" class="modal">
+            <div class="modal-content container center">
+                <h4>Confirme Eliminación</h4>
+                <p>Por favor confirme la eliminación del usuario ingresando la cédula correspondiente</p>
+                <div class="input-field col s3 m6">
+                    <i class="material-icons prefix">perm_identity</i>
+                    <input id="cedulaConfirm" type="number" class="validate black-text" requited>
+                    <label for="cedulaConfirm">Cédula</label>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <a class="modal-close waves-effect waves-green btn daken-3">Confirmar</a>
+            </div>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br>
+        <!-- visibility_off visibility offline_pin not_interested portable_wifi_off rss_feed settings_remote -->
+    </div>
+
+    <footer class="page-footer">
+        <br>
+        <div class="container center-align">
+            © 2020 Copyright IHOTEL
+            <a class="grey-text text-lighten-4 right" href="#!"></a>
+        </div>
+        <br><br>
+
+    </footer>
+
+    <!--Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+
+    <script src="./app.js"></script>
+    <script src="./init-firebase.js"></script>
+    <!--materialize-->
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
+
+
+</body>
+
+</html>
