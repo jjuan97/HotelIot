@@ -18,7 +18,6 @@ def scanBLE():
 
 def mqtt_pub(message):
 	try:
-		print("Enviando ["+str(message)+"] ...")
 		publish.single(topic, str(message), hostname=broker)
 	except:
 		print ("[ERROR]")
@@ -32,11 +31,14 @@ def scanNFC():
 		else:
 			card.settagtype(card.ALL)
 		if card.select():
-			print("TAG ID: "+ card.uid)
+			print("Manilla con UID: "+ card.uid + " aceptada, abriendo puerta");
+		else:
+			print("Detectando manilla...")
 	except:
 		pass
 	finally:
 		print("Fin Deteccion TAG NFC")
+		print(" ")
 
 while True:
 	scanNFC()
@@ -45,11 +47,11 @@ while True:
 	#data= "horario=De 7 AM a 9 PM?nombre=Restaurante IHoTel?ubicacion=Edificio 2, Piso 1, IHoTel"
 	data = "horario=7am a 6pm?nombre=Piscina El Descanso?recomendaciones=No tomarse fotos en la piscina?tipo=Piscina familiar?ubicacion=Edificio 2"
 	if str(data) != "None":
-		print("Se encontro el beacon con direccion MAC: " + str(data))
+		print("Enviando informacion ...")
 		mqtt_pub(data)
 		print("Enviado\nFin")
 		print(" ")
-		time.sleep(6)
+		time.sleep(1)
 	else:
 		print("Error detectando Beacon, compruebe beacon cercano")
 		print("")
