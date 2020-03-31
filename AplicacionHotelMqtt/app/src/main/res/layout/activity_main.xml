@@ -62,7 +62,7 @@
         android:id="@+id/imghorario"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="220dp"
+        android:layout_marginBottom="270dp"
         android:contentDescription="@string/imagenhorario"
         app:layout_constraintBottom_toTopOf="@+id/signout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,22 +70,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@mipmap/horario" />
 
+    <ImageView
+        android:id="@+id/imgmenu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="160dp"
+        android:contentDescription="@string/imagenmenu"
+        app:layout_constraintBottom_toTopOf="@+id/signout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@mipmap/menu" />
+
     <TextView
-        android:id="@+id/textubicacion"
-        android:layout_width="230dp"
-        android:layout_height="40dp"
+        android:id="@+id/textmenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="@string/ubicacion"
+        android:text="@string/menu"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgubicacion" />
+        app:layout_constraintTop_toBottomOf="@+id/imgmenu" />
 
     <TextView
         android:id="@+id/texthorario"
-        android:layout_width="230dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
@@ -108,16 +120,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgsitio" />
 
-    <ImageView
-        android:id="@+id/imgubicacion"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="92dp"
-        android:contentDescription="@string/imagensitio"
-        app:layout_constraintBottom_toTopOf="@+id/signout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/ubicacion" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

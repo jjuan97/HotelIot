@@ -19,10 +19,10 @@
     <string name="tittle_notification">IHotel</string>
     <string name="channel_name">Canal ihotel</string>
     <string name="channel_description">Descripcion ihotel</string>
-    <string name="sitio">Aquí se mostrara el nombre del sitio</string>
+    <string name="sitio">Aquí se mostrará el nombre del sitio</string>
     <string name="imagensitio">ImagenSitio</string>
-    <string name="horario">Aquí se mostrara la información del horario de atencion</string>
+    <string name="horario">Aquí se mostrará la información del horario de atencion</string>
     <string name="imagenhorario">ImagenHorario</string>
-    <string name="ubicacion">Aquí se mostrara la información de la ubicación</string>
-    <string name="imagenubicacion">Imagenubicacion</string>
+    <string name="menu">Aquí se mostrará el menu u promocion</string>
+    <string name="imagenmenu">ImagenHorario</string>
 </resources>

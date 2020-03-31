@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
     String emailLog;
     String dataPlace;
     String dataSchedule;
-    String dataLocation;
+    String dataMenu;
     String CHANNEL_ID= "idnotification";
     String EXAMPLE_SERVER = "tcp://broker.hivemq.com";
     Button signOut;
     TextView welcome;
     TextView sitio;
     TextView horario;
-    TextView ubicacion;
+    TextView menu;
     FirebaseAuth homeFirebaseAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth.AuthStateListener homeStateListenerAuth;
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         welcome = findViewById(R.id.textwelcome);
         sitio = findViewById(R.id.textsitio);
         horario = findViewById(R.id.texthorario);
-        ubicacion = findViewById(R.id.textubicacion);
+        menu = findViewById(R.id.textmenu);
 
         getDataActivity();
 
@@ -107,11 +107,11 @@ public class MainActivity extends AppCompatActivity {
             emailLog = extras.getString("emailLog");
             dataPlace = extras.getString("sitio");
             dataSchedule = extras.getString("horario");
-            dataLocation = extras.getString("ubicacion");
+            dataMenu = extras.getString("menu");
             if (dataPlace != null){
                 sitio.setText(dataPlace);
                 horario.setText(dataSchedule);
-                ubicacion.setText(dataLocation);
+                menu.setText(dataMenu);
             }
 
             String concatenate = getString(R.string.welcome) + " " + emailLog;
@@ -177,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) {
-                //TODO: Agregar a cada condicional una accion modificada en el archivo xml y ahi finaliza la aplicación
                 if (topic.equals(TOPIC_RESTAURANT)) {
                     String lugar = "Restaurante";
                     ArrayList<String> campos;
@@ -185,12 +184,13 @@ public class MainActivity extends AppCompatActivity {
 
                     String concatenatesitio = "Nombre del lugar: "+ campos.get(3);
                     String concatenatehorario = "Horario de atención: " + campos.get(1);
-                    String concatenateubicacion= "Se encuentra ubicado en: "+ campos.get(5);
+                    //format menu
+                    String concatenatemenu= "Menu de hoy: \n"+ campos.get(5).replace(':','\t').replace(',','\n');
                     sitio.setText(concatenatesitio);
                     horario.setText(concatenatehorario);
-                    ubicacion.setText(concatenateubicacion);
+                    menu.setText(concatenatemenu);
 
-                    displayNotification(lugar, concatenatesitio, concatenatehorario, concatenateubicacion);
+                    displayNotification(lugar, concatenatesitio, concatenatehorario, concatenatemenu);
                 }
                 else if(topic.equals(TOPIC_BAR)){
                     String lugar = "Bar";
@@ -200,12 +200,13 @@ public class MainActivity extends AppCompatActivity {
 
                     String concatenatesitio = "Nombre del lugar: "+ campos.get(3);
                     String concatenatehorario = "Horario de atención: " + campos.get(1);
-                    String concatenateubicacion= "Se encuentra ubicado en: "+ campos.get(5);
+                    //format menu
+                    String concatenatemenu= "Menu de hoy: \n"+ campos.get(5).replace(':',' ').replace(',','\n');
                     sitio.setText(concatenatesitio);
                     horario.setText(concatenatehorario);
-                    ubicacion.setText(concatenateubicacion);
+                    menu.setText(concatenatemenu);
 
-                    displayNotification(lugar, concatenatesitio, concatenatehorario, concatenateubicacion);
+                    displayNotification(lugar, concatenatesitio, concatenatehorario, concatenatemenu);
                 }
                 else if(topic.equals(TOPIC_POOL)){
                     String lugar = "Pisicna";
@@ -215,12 +216,12 @@ public class MainActivity extends AppCompatActivity {
 
                     String concatenatesitio = "Nombre del lugar: "+ campos.get(3);
                     String concatenatehorario = "Horario de atención: " + campos.get(1);
-                    String concatenateubicacion= "Se encuentra ubicado en: "+ campos.get(9);
+                    String concatenatemenu= "Las promociones en la piscina para hoy son: \n"+ campos.get(5).replace(',','\n');
                     sitio.setText(concatenatesitio);
                     horario.setText(concatenatehorario);
-                    ubicacion.setText(concatenateubicacion);
+                    menu.setText(concatenatemenu);
 
-                    displayNotification(lugar, concatenatesitio, concatenatehorario, concatenateubicacion);
+                    displayNotification(lugar, concatenatesitio, concatenatehorario, concatenatemenu);
                 }
             }
 
@@ -244,14 +245,14 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-    private void displayNotification(String lugar, String descSitio, String descHorario, String descUbicacion){
+    private void displayNotification(String lugar, String descSitio, String descHorario, String descmenu){
         NotificationManagerCompat notification = NotificationManagerCompat.from(this);
         createNotificationChannel();
         Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);
         notificationIntent.putExtra("emailLog", emailLog);
         notificationIntent.putExtra("sitio", descSitio);
         notificationIntent.putExtra("horario", descHorario);
-        notificationIntent.putExtra("ubicacion", descUbicacion);
+        notificationIntent.putExtra("menu", descmenu);
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder = new NotificationCompat.Builder(this, CHANNEL_ID)
