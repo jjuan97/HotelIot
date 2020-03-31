@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">AplicacionHotelMqtt</string>
+    <string name="app_name">IHoTel</string>
+    <string name="title_activity_login">IHoTel</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Iniciar Sesión</string>
+    <string name="action_sign_in_short">Iniciar</string>
+    <string name="action_sign_out">   Cerrar Sesión   </string>
+    <string name="welcome">"¡Bienvendio!  "</string>
+    <string name="invalid_username">El nombre de usuario es incorrecto</string>
+    <string name="invalid_password">El password debe ser >5 caracteres</string>
+    <string name="empty_username">Por favor ingresa tu email</string>
+    <string name="empty_password">Por favor ingresa tu contraseña</string>
+    <string name="empty_fields">Los campos estan vacíos</string>
+    <string name="login_failed">"Fallo el inicio de sesión, Por favor intentar nuevamente"</string>
+    <string name="failed">"A ocurrido un error"</string>
+    <string name="login_ready">"Tu sesión ya se encuentra iniciada"</string>
+    <string name="login_please">"Por favor inicia sesión"</string>
+    <string name="tittle_notification">IHotel</string>
+    <string name="channel_name">Canal ihotel</string>
+    <string name="channel_description">Descripcion ihotel</string>
+    <string name="sitio">Aquí se mostrará el nombre del sitio</string>
+    <string name="imagensitio">ImagenSitio</string>
+    <string name="horario">Aquí se mostrará la información del horario de atencion</string>
+    <string name="imagenhorario">ImagenHorario</string>
+    <string name="menu">Aquí se mostrará el menu u promocion</string>
+    <string name="imagenmenu">ImagenHorario</string>
 </resources>
