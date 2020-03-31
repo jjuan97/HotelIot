@@ -1,6 +1,5 @@
 #!/usr/bin/python
-'''
-from gattlib import DiscoveryService'''
+from gattlib import DiscoveryService
 import time
 import paho.mqtt.publish as publish
 
@@ -106,12 +105,10 @@ query_watch = col_query.on_snapshot(on_snapshot)
 
 #	Scanning Function
 def scanBLE():
-	'''devices = serviceBLE.discover(2)
+	devices = serviceBLE.discover(2)
 	for address, name in devices.items():
 		print("name:{}, address:{}".format(name,address))
-		return(address)'''
-	# Simulation of scan
-	return "AC:23:3F:A1:0C:47"
+		return(address)
 
 
 #	Search user id of the beacon
