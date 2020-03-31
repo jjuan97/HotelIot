@@ -198,7 +198,14 @@ public class MainActivity extends AppCompatActivity {
                     campos = separateCharacters(message.toString());
                     System.out.println(campos);
 
-                    //displayNotification(lugar, campos.get(5));
+                    String concatenatesitio = "Nombre del lugar: "+ campos.get(3);
+                    String concatenatehorario = "Horario de atención: " + campos.get(1);
+                    String concatenateubicacion= "Se encuentra ubicado en: "+ campos.get(5);
+                    sitio.setText(concatenatesitio);
+                    horario.setText(concatenatehorario);
+                    ubicacion.setText(concatenateubicacion);
+
+                    displayNotification(lugar, concatenatesitio, concatenatehorario, concatenateubicacion);
                 }
                 else if(topic.equals(TOPIC_POOL)){
                     String lugar = "Pisicna";
@@ -206,7 +213,14 @@ public class MainActivity extends AppCompatActivity {
                     campos = separateCharacters(message.toString());
                     System.out.println(campos);
 
-                    //displayNotification(lugar, campos.get(3));
+                    String concatenatesitio = "Nombre del lugar: "+ campos.get(3);
+                    String concatenatehorario = "Horario de atención: " + campos.get(1);
+                    String concatenateubicacion= "Se encuentra ubicado en: "+ campos.get(9);
+                    sitio.setText(concatenatesitio);
+                    horario.setText(concatenatehorario);
+                    ubicacion.setText(concatenateubicacion);
+
+                    displayNotification(lugar, concatenatesitio, concatenatehorario, concatenateubicacion);
                 }
             }
 
