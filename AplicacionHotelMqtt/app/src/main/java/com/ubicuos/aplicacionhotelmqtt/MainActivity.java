@@ -1,5 +1,6 @@
 package com.ubicuos.aplicacionhotelmqtt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -11,14 +12,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.ubicuos.aplicacionhotelmqtt.ui.login.LoginActivity;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -31,21 +39,30 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.regex.Pattern;
+
+
 public class MainActivity extends AppCompatActivity {
 
-    TextView mqttText;
-    Button borrarButton;
-    TextView notificacionM;
     Context context;
     MqttAndroidClient mqttClient;
     NotificationCompat.Builder builder;
+    String emailLog;
+    String dataPlace;
+    String dataSchedule;
+    String dataLocation;
     String CHANNEL_ID= "idnotification";
-    String TOPIC_MAIN = "hotel/raspberry1/#";
-    String TOPIC_RESTAURANT = "hotel/raspberry1/restaurant";
-    String TOPIC_BAR = "hotel/raspberry1/bar";
     String EXAMPLE_SERVER = "tcp://broker.hivemq.com";
     Button signOut;
+    TextView welcome;
+    TextView sitio;
+    TextView horario;
+    TextView ubicacion;
     FirebaseAuth homeFirebaseAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth.AuthStateListener homeStateListenerAuth;
 
     @Override
@@ -54,23 +71,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = this;
-        mqttText = findViewById(R.id.mqtt);
-        notificacionM = findViewById(R.id.textView2);
-        borrarButton = findViewById(R.id.borrar);
+
         signOut = findViewById(R.id.signout);
+        welcome = findViewById(R.id.textwelcome);
+        sitio = findViewById(R.id.textsitio);
+        horario = findViewById(R.id.texthorario);
+        ubicacion = findViewById(R.id.textubicacion);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String dato = extras.getString("lugar");
-            notificacionM.setText(dato);
-        }
+        getDataActivity();
 
-        borrarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mqttText.setText("");
-            }
-        });
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,14 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-        iniciarMqtt();
+        getIdDB();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        iniciarMqtt();
-    }
 
     @Override
     protected void onDestroy() {
@@ -97,11 +101,55 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void iniciarMqtt() {
+    private void getDataActivity(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            emailLog = extras.getString("emailLog");
+            dataPlace = extras.getString("sitio");
+            dataSchedule = extras.getString("horario");
+            dataLocation = extras.getString("ubicacion");
+            if (dataPlace != null){
+                sitio.setText(dataPlace);
+                horario.setText(dataSchedule);
+                ubicacion.setText(dataLocation);
+            }
+
+            String concatenate = getString(R.string.welcome) + " " + emailLog;
+            welcome.setText(concatenate);
+        }
+    }
+
+    private void getIdDB(){
+        db.collection("usuarios").whereEqualTo("email", emailLog)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                                if (task.getResult() != null) {
+                                    startMqtt(document.getId());
+                                }
+                            }
+                        } else {
+                            Log.e("Firebase", "Error getting documents.", task.getException());
+                            System.out.println("error: " + task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void startMqtt(String userID) {
         String clientId = MqttClient.generateClientId();
         MqttConnectOptions mqttOptions = new MqttConnectOptions();
         mqttOptions.setAutomaticReconnect(true);
         mqttClient = new MqttAndroidClient(context, EXAMPLE_SERVER, clientId);
+        //the different topics that user can manage
+        final String TOPIC_MAIN = "ihotel/"+userID+"/#";
+        final String TOPIC_RESTAURANT = "ihotel/"+userID+"/restaurantes";
+        final String TOPIC_BAR = "ihotel/"+userID+"/bares";
+        final String TOPIC_POOL = "ihotel/"+userID+"/piscinas";
+        System.out.println(TOPIC_MAIN);
         try {
             IMqttToken token = mqttClient.connect(mqttOptions);
             token.setActionCallback(new IMqttActionListener() {
@@ -119,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } catch (MqttException e) {
+            System.out.println("No se pudo iniciar servidor mqtt");
         }
 
         MqttCallback mqttCallback = new MqttCallback() {
@@ -128,23 +177,36 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) {
+                //TODO: Agregar a cada condicional una accion modificada en el archivo xml y ahi finaliza la aplicación
                 if (topic.equals(TOPIC_RESTAURANT)) {
                     String lugar = "Restaurante";
-                    String addText = mqttText.getText() + "topic: ";
-                    addText = addText + topic + " mensaje: ";
-                    addText = addText + message.toString();
-                    addText = addText + "\n";
-                    mqttText.setText(addText);
-                    displayNotification(lugar, addText);
+                    ArrayList<String> campos;
+                    campos = separateCharacters(message.toString());
+
+                    String concatenatesitio = "Nombre del lugar: "+ campos.get(3);
+                    String concatenatehorario = "Horario de atención: " + campos.get(1);
+                    String concatenateubicacion= "Se encuentra ubicado en: "+ campos.get(5);
+                    sitio.setText(concatenatesitio);
+                    horario.setText(concatenatehorario);
+                    ubicacion.setText(concatenateubicacion);
+
+                    displayNotification(lugar, concatenatesitio, concatenatehorario, concatenateubicacion);
                 }
                 else if(topic.equals(TOPIC_BAR)){
                     String lugar = "Bar";
-                    String addText = mqttText.getText() + "topic: ";
-                    addText = addText + topic + " mensaje: ";
-                    addText = addText + message.toString();
-                    addText = addText + "\n";
-                    mqttText.setText(addText);
-                    displayNotification(lugar, addText);
+                    ArrayList<String> campos;
+                    campos = separateCharacters(message.toString());
+                    System.out.println(campos);
+
+                    //displayNotification(lugar, campos.get(5));
+                }
+                else if(topic.equals(TOPIC_POOL)){
+                    String lugar = "Pisicna";
+                    ArrayList<String> campos;
+                    campos = separateCharacters(message.toString());
+                    System.out.println(campos);
+
+                    //displayNotification(lugar, campos.get(3));
                 }
             }
 
@@ -154,19 +216,34 @@ public class MainActivity extends AppCompatActivity {
         };
         mqttClient.setCallback(mqttCallback);
     }
-    private void displayNotification(String lugar, String desc){
+
+    private ArrayList<String> separateCharacters(String characters){
+        String separator = Pattern.quote("?");
+        String[] processSplit = null;
+        ArrayList<String> result = new ArrayList<>();
+        processSplit = characters.split(separator);
+        for (int i = 0; i < processSplit.length; i++) {
+            String[] splitToArray = processSplit[i].split("=");
+            result.add(splitToArray[0]);
+            result.add(splitToArray[1]);
+        }
+        return result;
+    }
+
+    private void displayNotification(String lugar, String descSitio, String descHorario, String descUbicacion){
         NotificationManagerCompat notification = NotificationManagerCompat.from(this);
         createNotificationChannel();
         Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);
-        notificationIntent.putExtra("lugar", lugar);
-        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        notificationIntent.putExtra("emailLog", emailLog);
+        notificationIntent.putExtra("sitio", descSitio);
+        notificationIntent.putExtra("horario", descHorario);
+        notificationIntent.putExtra("ubicacion", descUbicacion);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.hotel)
                 .setContentTitle(lugar)
-                .setContentText(desc)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(desc))
+                .setContentText(descSitio)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);

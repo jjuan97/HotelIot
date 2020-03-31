@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         loginFirebaseAuth = FirebaseAuth.getInstance();
         usernameEditText = findViewById(R.id.username);
@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (hotelFirebaseUser != null){
                     Toast.makeText(LoginActivity.this, getString(R.string.login_ready),Toast.LENGTH_SHORT).show();
                     Intent toMain = new Intent(LoginActivity.this, MainActivity.class);
+                    toMain.putExtra("emailLog", hotelFirebaseUser.getEmail());
                     startActivity(toMain);
                 }
                 else{
@@ -59,8 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = usernameEditText.getText().toString();
-                String pass = passwordEditText.getText().toString();
+                final String email = usernameEditText.getText().toString();
+                final String pass = passwordEditText.getText().toString();
 
                 if (email.isEmpty()) {
                     usernameEditText.setError(getString(R.string.empty_username));
@@ -81,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String welcome = getString(R.string.welcome);
                                 Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
                                 Intent intentToMain = new Intent(LoginActivity.this, MainActivity.class);
+                                intentToMain.putExtra("emailLog", email);
                                 startActivity(intentToMain);
                                 finish();
                             }
