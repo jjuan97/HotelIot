@@ -19,11 +19,16 @@ https://youtu.be/144RZzcFyQ0
     `pip install --upgrade firebase-admin`
     Tomado de: https://firebase.google.com/docs/firestore/quickstart
 
-### Instalacion para raspberry (detecta beacon y NFC)
+### Instalación para raspberry (detecta beacon y NFC)
 1. Descargar imagen raspbian (jessie) que permite ejecutar las librerias que trabajan con el lector NFC touchatag: https://drive.google.com/drive/u/2/folders/1T3qSvR-Hg-hm_u__w2YWRVnkBnsRxgxd
 2. Instalar imagen en la memoria SD (seguir documentacion oficial: https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
 3. Seguir los pasos de la anterior instalación
 4. Ejecutar archivo mqttClientNFCandBeacontoAndroid.py en la carpeta mqttBeconAndNfc
+
+### Instalar aplicación android
+La instalación de la aplicación se puede dar de dos formas:
+1. Abrir desde android studio el proyecto AplicacionHotelMqtt y compilar la aplicación.
+2. Ir a la ruta AplicacionHotelMqtt/app/release/ agregar el archivo app-release.apk a su dispositivo Smartphone. Abrir archivo desde el celular y aceptar la instalación de fuentes no oficiales.
 
 ### POSIBLES ERRORES: 
 1. Instalar gattlib podria significar un problema para el archivo dphys-swapfile:
@@ -43,6 +48,7 @@ https://youtu.be/144RZzcFyQ0
     Tomado de https://stackoverflow.com/questions/37495375/python-pip-install-throws-typeerror-unsupported-operand-types-for-retry
     
     - 2.2. Utilizar una version de python > 3.5 para ejecutar el script donde se emplee Firebase.
+3. Aplicación no abre, si la aplicación no abre comprobar si su Smartphone tiene version de android por encima de la API 23 (Android 6.0 Marshmallow), de lo contrario la aplicación no se podra ejecutar con exito.
 
 ### Autores:
 - JUAN JOSE PAREDES ROSERO. (jparedesr@unicauca.edu.co)
