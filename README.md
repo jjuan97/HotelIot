@@ -24,7 +24,8 @@ https://youtu.be/144RZzcFyQ0
 1. Descargar imagen raspbian (jessie) que permite ejecutar las librerias que trabajan con el lector NFC touchatag: https://drive.google.com/drive/u/2/folders/1T3qSvR-Hg-hm_u__w2YWRVnkBnsRxgxd
 2. Instalar imagen en la memoria SD (seguir documentacion oficial: https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
 3. Seguir los pasos de la anterior instalación hasta el reinicio de raspberry.
-4. Ejecutar archivo mqttClientNFCandBeacontoAndroid.py en la carpeta mqttBeconAndNfc.
+4. Installar los drivers para el lector NFC, en caso de utilizar el referenciado en el documento. Los drivers se pueden encontrar en: https://github.com/jjuan97/Packages-for-Ihotel
+5. Ejecutar archivo mqttClientNFCandBeacontoAndroid.py en la carpeta mqttBeconAndNfc.
 
 ### Instalar aplicación web
 El archivo web no necesita de una instalación, basta solo con ejecutar el archivo index.html.
